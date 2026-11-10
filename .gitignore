@@ -1,0 +1,19 @@
+# Hesaplar, kullanıcı odaları, siparişler, ödeme ayarları (veri/odeme.json) ve
+# yüklenen resimler sunucuda oluşur; koda eklenmez
+veri/
+__pycache__/
+*.pyc
+
+# Ücretli panel şablonu (Equation — ThemeForest lisansı yeniden dağıtıma izin vermez).
+# Satın aldığınız kopyadan kurmak için: python sablon_kur.py "C:/yol/equation-v2.2.0"
+static/panel/sablon/
+
+# Ortam değişkenleri / yerel ayarlar
+.env
+.env.*
+docker-compose.override.yml
+
+# Editör / sistem
+.idea/
+Thumbs.db
+desktop.ini

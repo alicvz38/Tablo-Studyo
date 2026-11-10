@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cam Tablo — Tablo Stüdyo</title>
+<link rel="icon" type="image/svg+xml" href="/static/panel/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="/static/panel/sablon/src/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/magaza/magaza.css" rel="stylesheet">
+<script src="/static/tema.js"></script>
+</head>
+<body data-sayfa="urun">
+
+<header class="ust">
+  <div class="kap ust-satir">
+    <a class="logo" href="/">Tablo<span>Stüdyo</span></a>
+    <form class="arama" id="arama-formu" action="/" role="search">
+      <label for="arama" class="visually-hidden">Ara</label>
+      <input id="arama" name="ara" type="search" placeholder="Cam tablo ara: kahve, çiçek, soyut…" autocomplete="off">
+      <button type="submit" aria-label="Ara">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+    </form>
+    <nav class="ust-ikonlar" aria-label="Hesap">
+      <div class="hesap-alani" id="hesap-alani"><a class="ust-link giris-link" href="/giris">Giriş Yap</a></div>
+      <button class="ikon-dugme" type="button" data-bs-toggle="offcanvas" data-bs-target="#favoriler" aria-label="Favoriler">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-9.3-9.3C1.6 8.1 3.6 4.5 7.2 4.5c2 0 3.6 1.1 4.8 2.8 1.2-1.7 2.8-2.8 4.8-2.8 3.6 0 5.6 3.6 4.5 6.7-1.8 4.7-9.3 9.3-9.3 9.3z"/></svg>
+        <span class="rozet" id="favori-sayi"></span>
+      </button>
+      <button class="ikon-dugme" type="button" data-bs-toggle="offcanvas" data-bs-target="#sepet" aria-label="Sepet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="rozet" id="sepet-sayi"></span>
+      </button>
+    </nav>
+  </div>
+  <nav class="kap kategori-cubugu" id="kategoriler" aria-label="Kategoriler">
+    <a href="/" data-tip="">Tüm Cam Tablolar</a>
+    <a href="/?tip=yatay" data-tip="yatay">Yatay Tablolar</a>
+    <a href="/?tip=dikey" data-tip="dikey">Dikey Tablolar</a>
+    <a href="/?tip=kare" data-tip="kare">Kare Tablolar</a>
+    <a href="/?tip=yuvarlak" data-tip="yuvarlak">Yuvarlak Tablolar</a>
+  </nav>
+</header>
+
+<main class="kap">
+  <nav class="kirinti" id="kirinti" aria-label="Konum"></nav>
+
+  <div class="urun-duzen" id="urun-duzen">
+    <div class="galeri" id="galeri">
+      <div class="kucukler" id="kucukler" role="tablist" aria-label="Görseller"></div>
+      <div class="ana-gorsel iskelet" id="ana-gorsel">
+        <img id="ana-resim" alt="">
+        <button class="galeri-ok sol" id="galeri-onceki" type="button" aria-label="Önceki görsel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="galeri-ok sag" id="galeri-sonraki" type="button" aria-label="Sonraki görsel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <span class="galeri-sayac" id="galeri-sayac"></span>
+      </div>
+    </div>
+
+    <div class="bilgi-kutu" id="bilgi">
+      <div class="satir-iskelet" style="height:30px;width:40%"></div>
+      <div class="satir-iskelet"></div>
+      <div class="satir-iskelet kisa"></div>
+    </div>
+  </div>
+
+  <section class="bolum px-0 degerlendirme-bolum" id="degerlendirmeler" hidden aria-labelledby="degerlendirme-baslik">
+    <h2 class="bolum-baslik" id="degerlendirme-baslik">Değerlendirmeler</h2>
+    <div class="degerlendirme-duzen">
+      <div id="dg-ozet"></div>
+      <div><div id="dg-form"></div><div id="dg-liste"></div></div>
+    </div>
+  </section>
+
+  <section class="bolum px-0" id="benzer-bolum" hidden>
+    <h2 class="bolum-baslik">Bunları da beğenebilirsiniz</h2>
+    <div class="izgara" id="benzerler"></div>
+  </section>
+
+  <div class="bos-sonuc" id="bulunamadi" hidden>
+    <div class="simge">🖼️</div>
+    <h3>Bu ürün bulunamadı</h3>
+    <p>Ürün kaldırılmış ya da adres yanlış olabilir.</p>
+    <a class="dugme dugme-acik" href="/">Bütün tablolara dön</a>
+  </div>
+</main>
+
+<footer class="alt-bilgi">
+  <div class="kap">
+    <div class="alt-izgara">
+      <div>
+        <div class="alt-logo">Tablo Stüdyo</div>
+        <p class="mt-2">Temperli cam tablolar. Her ürün, gerçek oda fotoğraflarında cam yansımasıyla gösterilir.</p>
+      </div>
+      <div>
+        <h4>Alışveriş</h4>
+        <ul>
+          <li><a href="/?tip=yatay">Yatay tablolar</a></li>
+          <li><a href="/?tip=dikey">Dikey tablolar</a></li>
+          <li><a href="/?tip=kare">Kare tablolar</a></li>
+          <li><a href="/?tip=yuvarlak">Yuvarlak tablolar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hesabım</h4>
+        <ul>
+          <li><a href="/hesabim#siparisler">Siparişlerim</a></li>
+          <li><a href="/hesabim#bilgiler">Hesap bilgilerim</a></li>
+          <li><a href="/kayit">Üye ol</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="alt-satir">© <span class="yil"></span> Tablo Stüdyo</div>
+  </div>
+</footer>
+
+<div class="modal fade buyuk-galeri" id="buyuk-galeri" tabindex="-1" aria-label="Büyük görsel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-lg-down modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+      <div class="modal-body">
+        <img id="buyuk-resim" alt="">
+        <button class="galeri-ok sol" id="buyuk-onceki" type="button" aria-label="Önceki görsel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <button class="galeri-ok sag" id="buyuk-sonraki" type="button" aria-label="Sonraki görsel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="sepet" aria-labelledby="sepet-baslik">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="sepet-baslik">Sepetiniz</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="sepet-liste" class="flex-grow-1"></div>
+    <div id="sepet-alt"></div>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="favoriler" aria-labelledby="favori-baslik">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="favori-baslik">Favorileriniz</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+  </div>
+  <div class="offcanvas-body" id="favori-liste"></div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3" id="toast-kok"></div>
+
+<script src="/static/panel/sablon/src/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/magaza/magaza.js"></script>
+<script src="/static/magaza/destek.js"></script>
+<script src="/static/canli.js"></script>
+</body>
+</html>

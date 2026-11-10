@@ -1,0 +1,11 @@
+services:
+  tablo-studyo:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # Yeni hesap açarken istenecek kod (yabancılar hesap açamasın); boş bırakılırsa herkes kayıt olabilir
+      STUDYO_KAYIT_KODU: "buraya-bir-kod-yazin"
+    volumes:
+      - ./veri:/veri
+    restart: unless-stopped

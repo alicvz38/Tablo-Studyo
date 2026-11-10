@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Yönetim Paneli | Tablo Stüdyo</title>
+    <link rel="icon" type="image/svg+xml" href="/static/panel/logo.svg">
+    <!-- Görünüm (Equation / Etsy): sayfa çizilmeden uygulanır ki önce diğer görünüm görünmesin -->
+    <script>try { document.documentElement.dataset.yapi = localStorage.getItem("panel_yapi") === "etsy" ? "etsy" : "equation"; } catch (e) { document.documentElement.dataset.yapi = "equation"; }</script>
+    <link href="/static/panel/sablon/layouts/vertical-dark-menu/css/light/loader.css" rel="stylesheet">
+    <link href="/static/panel/sablon/layouts/vertical-dark-menu/css/dark/loader.css" rel="stylesheet">
+    <script src="/static/panel/sablon/layouts/vertical-dark-menu/loader.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="/static/panel/sablon/src/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/panel/sablon/layouts/vertical-dark-menu/css/light/plugins.css" rel="stylesheet">
+    <link href="/static/panel/sablon/layouts/vertical-dark-menu/css/dark/plugins.css" rel="stylesheet">
+    <link href="/static/panel/sablon/src/assets/css/light/forms/switches.css" rel="stylesheet">
+    <link href="/static/panel/sablon/src/assets/css/dark/forms/switches.css" rel="stylesheet">
+    <link href="/static/panel/sablon/src/assets/css/light/components/modal.css" rel="stylesheet">
+    <link href="/static/panel/sablon/src/assets/css/dark/components/modal.css" rel="stylesheet">
+    <link href="/static/panel/sablon/src/assets/css/light/apps/ecommerce-create.css" rel="stylesheet">
+    <link href="/static/panel/sablon/src/assets/css/dark/apps/ecommerce-create.css" rel="stylesheet">
+    <link href="/static/panel/sablon/layouts/vertical-dark-menu/css/light/structure-mod.css" rel="stylesheet">
+    <link href="/static/panel/sablon/layouts/vertical-dark-menu/css/dark/structure-mod.css" rel="stylesheet">
+    <link href="/static/panel/panel.css" rel="stylesheet">
+    <link href="/static/panel/etsy.css" rel="stylesheet">
+</head>
+<body class="">
+
+    <div id="load_screen"><div class="loader"><div class="loader-content">
+        <div class="spinner-grow align-self-center"></div>
+    </div></div></div>
+
+    <!--  ÜST ÇUBUK  -->
+    <div class="header-container container-xxl">
+        <header class="header navbar navbar-expand-sm expand-header">
+            <a href="javascript:void(0);" class="sidebarCollapse" aria-label="Menü">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </a>
+
+            <div class="ust-bilgi d-none d-md-flex align-items-center gap-2 ms-3">
+                <span id="baglanti" class="badge badge-light-warning">● Bağlanıyor…</span>
+                <div id="kullanicilar" class="kullanicilar" title="Bu hesapla bağlı cihazlar; ekranlar canlı eşitlenir"></div>
+            </div>
+
+            <ul class="navbar-item flex-row ms-lg-auto ms-0 align-items-center">
+                <li class="nav-item me-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary yapi-dugme _no--effects" id="yapi-degistir" title="Panel görünümünü değiştir">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                        <span class="yapi-ad d-none d-md-inline" id="yapi-ad">Etsy Görünümü</span>
+                    </button>
+                </li>
+                <li class="nav-item me-2 d-none d-sm-block">
+                    <a href="/" target="_blank" class="btn btn-sm btn-outline-primary _no--effects">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                        Mağazayı Gör
+                    </a>
+                </li>
+                <li class="nav-item theme-toggle-item">
+                    <a href="javascript:void(0);" class="nav-link theme-toggle" title="Açık / koyu tema">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon dark-mode"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun light-mode"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </a>
+                </li>
+                <li class="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
+                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="kullaniciMenusu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="avatar-container">
+                            <div class="avatar avatar-sm avatar-indicators avatar-online">
+                                <span class="avatar-title rounded-circle" id="avatar-harf">?</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu position-absolute" aria-labelledby="kullaniciMenusu">
+                        <div class="user-profile-section">
+                            <div class="media mx-auto">
+                                <div class="emoji me-2">&#x1F44B;</div>
+                                <div class="media-body">
+                                    <h5 id="ad-etiket">…</h5>
+                                    <p id="kullanici-adi-etiket">Mağaza yöneticisi</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-item">
+                            <a href="javascript:void(0);" id="hesap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> <span>Hesap Ayarları</span>
+                            </a>
+                        </div>
+                        <div class="dropdown-item">
+                            <label class="takip-satiri" title="Açıkken aynı hesapla bağlı başka bir cihazda Oda Sunumları / Tablo Ekle arasında geçilince bu cihaz da geçer">
+                                <input type="checkbox" class="form-check-input m-0" id="takip"> <span>Ekranı takip et</span>
+                            </label>
+                        </div>
+                        <div class="dropdown-item">
+                            <a href="javascript:void(0);" id="cikis">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> <span>Çıkış Yap</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </header>
+    </div>
+
+    <div class="main-container" id="container">
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  SOL MENÜ  -->
+        <div class="sidebar-wrapper sidebar-theme">
+            <nav id="sidebar">
+                <div class="navbar-nav theme-brand flex-row text-center">
+                    <div class="nav-logo">
+                        <div class="nav-item theme-logo">
+                            <a href="#gosterge"><img src="/static/panel/logo.svg" class="navbar-logo" alt="logo"></a>
+                        </div>
+                        <div class="nav-item theme-text">
+                            <a href="#gosterge" class="nav-link"> Tablo Stüdyo </a>
+                        </div>
+                    </div>
+                    <div class="nav-item sidebar-toggle">
+                        <div class="btn-toggle sidebarCollapse">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-left"><polyline points="11 17 6 12 11 7"></polyline><polyline points="18 17 13 12 18 7"></polyline></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="shadow-bottom"></div>
+                <ul class="list-unstyled menu-categories" id="menuler">
+                    <li class="menu active" data-menu="gosterge">
+                        <a href="#gosterge" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <span>Gösterge Paneli</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu menu-heading">
+                        <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>STÜDYO</span></div>
+                    </li>
+                    <li class="menu" data-menu="oda">
+                        <a href="#oda" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                                <span>Oda Sunumları</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu" data-menu="tablo">
+                        <a href="#tablo" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                                <span>Tablo Ekle</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu menu-heading">
+                        <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>MAĞAZA</span></div>
+                    </li>
+                    <li class="menu" data-menu="magaza">
+                        <a href="#magaza-menu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                <span>Ürünler</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="magaza-menu" data-bs-parent="#menuler">
+                            <li data-alt="urunler"><a href="#urunler"> Ürün Listesi </a></li>
+                            <li data-alt="urun-ekle"><a href="#urun-ekle"> Ürün Ekle </a></li>
+                            <li><a href="/" target="_blank"> Mağazayı Görüntüle ↗ </a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu menu-heading">
+                        <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>SATIŞ</span></div>
+                    </li>
+                    <li class="menu" data-menu="siparisler">
+                        <a href="#siparisler" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-package"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                <span>Siparişler</span>
+                                <span class="badge badge-danger sidebar-label" id="menu-siparis-rozet" hidden></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu" data-menu="destek">
+                        <a href="#destek" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                <span>Canlı Destek</span>
+                                <span class="badge badge-danger sidebar-label" id="menu-destek-rozet" hidden></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu" data-menu="degerlendirmeler">
+                        <a href="#degerlendirmeler" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                <span>Değerlendirmeler</span>
+                                <span class="badge badge-danger sidebar-label" id="menu-degerlendirme-rozet" hidden></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu" data-menu="musteriler">
+                        <a href="#musteriler" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                <span>Müşteriler</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu menu-heading">
+                        <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>YÖNETİM</span></div>
+                    </li>
+                    <li class="menu" data-menu="saticilar">
+                        <a href="#saticilar" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+                                <span>Satıcılar</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!--  İÇERİK  -->
+        <div id="content" class="main-content">
+            <div class="layout-px-spacing">
+                <div class="middle-content container-xxl p-0">
+
+                    <div class="page-meta d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb" id="kirinti">
+                                <li class="breadcrumb-item"><a href="#gosterge">Panel</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Gösterge Paneli</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- ============ GÖSTERGE PANELİ ============ -->
+                    <section class="sayfa" id="s-gosterge">
+                        <div class="row layout-top-spacing g-4">
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="widget-content widget-content-area sayac-kart">
+                                    <div class="sayac-ikon bg-primary">🏠</div>
+                                    <div><div class="sayac-deger" id="g-oda">—</div><div class="sayac-ad">Kayıtlı Oda</div></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="widget-content widget-content-area sayac-kart">
+                                    <div class="sayac-ikon bg-success">🖼️</div>
+                                    <div><div class="sayac-deger" id="g-urun">—</div><div class="sayac-ad">Ürün</div></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="widget-content widget-content-area sayac-kart">
+                                    <div class="sayac-ikon bg-warning">🛍️</div>
+                                    <div><div class="sayac-deger" id="g-yayinda">—</div><div class="sayac-ad">Mağazada Yayında</div></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="widget-content widget-content-area sayac-kart">
+                                    <div class="sayac-ikon bg-secondary">📐</div>
+                                    <div><div class="sayac-deger sayac-kucuk" id="g-tipler">—</div><div class="sayac-ad">Oda tipleri</div></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-6">
+                                <a href="#siparisler/alindi" class="widget-content widget-content-area sayac-kart d-flex">
+                                    <div class="sayac-ikon bg-danger">📦</div>
+                                    <div><div class="sayac-deger" id="g-bekleyen">—</div><div class="sayac-ad">Bekleyen Sipariş (onay / hazırlık)</div></div>
+                                </a>
+                            </div>
+                            <div class="col-xl-4 col-sm-6">
+                                <a href="#siparisler" class="widget-content widget-content-area sayac-kart d-flex">
+                                    <div class="sayac-ikon bg-info">💰</div>
+                                    <div><div class="sayac-deger" id="g-ciro">—</div><div class="sayac-ad" id="g-siparis-sayisi">Toplam satış</div></div>
+                                </a>
+                            </div>
+                            <div class="col-xl-4 col-sm-12">
+                                <a href="#musteriler" class="widget-content widget-content-area sayac-kart d-flex">
+                                    <div class="sayac-ikon bg-primary">👥</div>
+                                    <div><div class="sayac-deger" id="g-musteri">—</div><div class="sayac-ad">Üye Müşteri</div></div>
+                                </a>
+                            </div>
+
+                            <div class="col-xxl-8">
+                                <div class="widget-content widget-content-area h-100">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="mb-0">Son Eklenen Ürünler</h5>
+                                        <a href="#urunler" class="btn btn-sm btn-outline-primary">Tümünü Gör</a>
+                                    </div>
+                                    <div class="row g-3" id="g-son-urunler"></div>
+                                </div>
+                            </div>
+                            <div class="col-xxl-4">
+                                <div class="widget-content widget-content-area h-100">
+                                    <h5 class="mb-3">Hızlı İşlemler</h5>
+                                    <div class="d-grid gap-2">
+                                        <a href="#urun-ekle" class="btn btn-success">＋ Yeni Ürün Ekle</a>
+                                        <a href="#oda" class="btn btn-primary">🏠 Oda Sunumu Hazırla</a>
+                                        <a href="#tablo" class="btn btn-secondary">🖼️ Tablolarla Odaları Dene</a>
+                                        <a href="/" target="_blank" class="btn btn-outline-primary">🛍️ Mağazayı Görüntüle ↗</a>
+                                    </div>
+                                    <hr>
+                                    <p class="text-muted small mb-0">Ürünler, kaydettiğiniz odalarda “Tablo Ekle”deki gibi cam tablo olarak
+                                        gösterilir. Bir odanın yansımasını “Oda Sunumları”nda değiştirip kaydettiğinizde o odadaki
+                                        bütün ürün görselleri kendiliğinden yenilenir.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ ODA SUNUMLARI ============ -->
+                    <section class="sayfa" id="s-oda" hidden>
+                        <div class="row layout-top-spacing g-3">
+                            <div class="col-12">
+                                <div class="widget-content widget-content-area arac-cubugu">
+                                    <div class="arac-grubu">
+                                        <span class="arac-baslik">Oda</span>
+                                        <button class="btn btn-primary" id="o-yukle">📂 1. Oda Resmi Yükle</button>
+                                        <button class="btn btn-outline-primary" id="o-kayitlar" title="Kayıtlı bir odayı açıp düzenleyin ya da silin.">📋 Kayıtlı Odalar</button>
+                                    </div>
+                                    <div class="arac-grubu">
+                                        <span class="arac-baslik">Tablo Alanı</span>
+                                        <button class="btn btn-warning" id="o-bul" title="Odadaki çerçevenin iç alanını bulur; tablo yoksa boş duvara yerleştirir.">🔍 2. Otomatik Tablo Bul</button>
+                                        <button class="btn btn-outline-warning" id="o-duvar" title="Çerçevesiz odalarda duvar açısına uygun bir tablo yeri açar.">🧱 Boş Duvara Yerleştir</button>
+                                    </div>
+                                    <div class="arac-grubu">
+                                        <span class="arac-baslik">Resim</span>
+                                        <button class="btn btn-success" id="o-resim" title="Yansımayı ayarlarken görmek için tabloya bir resim koyun.">🖼️ 3. Tablo İçine Resim Seç</button>
+                                    </div>
+                                    <div class="arac-grubu">
+                                        <span class="arac-baslik">Kaydet</span>
+                                        <button class="btn btn-info" id="o-kaydet" title="Odayı, köşe koordinatlarını, tablo tipini ve yansıma ayarlarını kaydeder.">🗄️ 4. Odayı Kaydet</button>
+                                        <button class="btn btn-outline-info" id="o-indir" title="Görüntüyü tam boy ve tam kalitede indirir.">💾 Sonucu İndir</button>
+                                    </div>
+                                    <input type="file" id="o-yukle-dosya" accept="image/*" hidden>
+                                    <input type="file" id="o-resim-dosya" accept="image/*" hidden>
+                                </div>
+                            </div>
+                            <div class="col-xl-9 col-lg-8">
+                                <div class="widget-content widget-content-area p-2 sahne-kutu">
+                                    <div class="sahne" id="o-sahne">
+                                        <canvas id="o-tuval"></canvas>
+                                        <div class="bos" id="o-bos">📂 Başlamak için bir oda resmi yükleyin</div>
+                                        <div class="mesgul" id="o-mesgul" hidden><span class="spinner-border text-primary"></span><span class="metin"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4">
+                                <div class="widget-content widget-content-area ayar-paneli" id="o-panel"></div>
+                            </div>
+                            <div class="col-12">
+                                <div class="durum" id="o-durum">
+                                    <span class="mesaj"></span>
+                                    <span class="ipucu">Sol tık: köşe / kenar / yüzey taşı • Kaydırıcıya çift tık: varsayılan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ TABLO EKLE ============ -->
+                    <section class="sayfa" id="s-tablo" hidden>
+                        <div class="row layout-top-spacing g-3">
+                            <div class="col-12">
+                                <div class="widget-content widget-content-area arac-cubugu">
+                                    <div class="arac-grubu">
+                                        <span class="arac-baslik">Tablo Resimleri</span>
+                                        <button class="btn btn-success" id="t-yukle" title="Birden fazla resim seçebilirsiniz; tipleri en-boy oranından tahmin edilir.">🖼️ Tablo Resimleri Yükle</button>
+                                        <button class="btn btn-outline-danger" id="t-temizle">🗑 Resimleri Temizle</button>
+                                    </div>
+                                    <div class="arac-grubu">
+                                        <span class="arac-baslik">Odalara Ekle</span>
+                                        <button class="btn btn-warning" id="t-otomatik" title="Her resmi kendi tipindeki tüm odalara ekler.">⚡ Tipine Uyanları Tüm Odalara Ekle</button>
+                                    </div>
+                                    <div class="arac-grubu">
+                                        <span class="arac-baslik">Mağaza</span>
+                                        <button class="btn btn-primary" id="t-urun" title="Önizlenen resmi mağazaya ürün olarak ekler.">🛍️ Bu Resimden Ürün Oluştur</button>
+                                    </div>
+                                    <div class="arac-grubu">
+                                        <span class="arac-baslik">İndir</span>
+                                        <button class="btn btn-outline-info" id="t-indir">💾 Önizlemeyi İndir</button>
+                                        <button class="btn btn-info" id="t-toplu" title="Zip içinde <Tip>/<oda>/<resim>.jpg düzeninde indirilir.">📦 Odalara Eklenen Resimleri İndir</button>
+                                    </div>
+                                    <div class="arac-grubu">
+                                        <span class="arac-baslik">Görünüm</span>
+                                        <div class="switch form-switch-custom switch-inline form-switch-primary mb-0" title="Her odanın 'Oda Sunumları'nda kaydedilen yansıma ayarı kullanılır">
+                                            <input class="switch-input" type="checkbox" role="switch" id="t-yansima" checked>
+                                            <label class="switch-label" for="t-yansima">✨ Kayıtlı Yansıma</label>
+                                        </div>
+                                        <button class="btn btn-outline-secondary" id="t-yenile">🔄 Listeyi Yenile</button>
+                                    </div>
+                                    <input type="file" id="t-yukle-dosya" accept="image/*" multiple hidden>
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-xl-4">
+                                <div class="widget-content widget-content-area yan-kutu">
+                                    <h6 class="kutu-baslik">Kayıtlı Odalar</h6>
+                                    <p class="text-muted small mb-2">Önizlenecek odayı seçin. Ctrl / Shift ile çoklu seçimde “Odaya Ekle” seçili odaların hepsine uygulanır.</p>
+                                    <div class="liste-kutu">
+                                        <table class="table table-hover table-sm liste mb-0" id="t-odalar">
+                                            <thead><tr><th>#</th><th>Tip</th><th>Oda</th><th title="Kayıtlı yansıma gücü">✨</th><th>Resim</th></tr></thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <button class="btn btn-sm btn-outline-secondary flex-fill" id="t-tumu">Tümünü Seç</button>
+                                        <button class="btn btn-sm btn-outline-primary flex-fill" id="t-duzenle" title="Önizlenen odayı 'Oda Sunumları'nda açar (listede çift tıklama da olur).">✏️ Odayı Düzenle</button>
+                                    </div>
+                                    <h6 class="kutu-baslik mt-3">Seçili Resim</h6>
+                                    <div class="secili-resim" id="t-secili-resim"></div>
+                                </div>
+                            </div>
+                            <div class="col-xxl-6 col-xl-8">
+                                <div class="widget-content widget-content-area orta-kutu">
+                                    <div class="onizleme">
+                                        <button class="btn btn-outline-secondary ok" id="t-onceki" title="Önceki resim (←)">◀</button>
+                                        <div class="sahne" id="t-sahne">
+                                            <img id="t-resim" alt="" hidden>
+                                            <div class="bos" id="t-bos"></div>
+                                            <div class="mesgul ince" id="t-mesgul" hidden><span class="spinner-border spinner-border-sm text-primary"></span></div>
+                                        </div>
+                                        <button class="btn btn-outline-secondary ok" id="t-sonraki" title="Sonraki resim (→)">▶</button>
+                                    </div>
+                                    <div class="sayac" id="t-sayac"></div>
+                                    <div class="alt-satir">
+                                        <b>Resmin tipi:</b>
+                                        <div class="btn-group btn-group-sm" id="t-tipler"></div>
+                                        <button class="btn btn-success" id="t-ata" disabled>➕ Odaya Ekle</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-xl-12">
+                                <div class="widget-content widget-content-area yan-kutu">
+                                    <h6 class="kutu-baslik">Odanın Resimleri</h6>
+                                    <div id="t-sag-baslik" class="sag-baslik"></div>
+                                    <div class="d-flex gap-2 mb-2">
+                                        <button class="btn btn-sm btn-success flex-fill" id="t-hepsi">✔ Hepsini Ekle</button>
+                                        <button class="btn btn-sm btn-outline-secondary flex-fill" id="t-hicbiri">✖ Hiçbiri</button>
+                                    </div>
+                                    <div class="sag-liste" id="t-sag-liste"></div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="durum" id="t-durum">
+                                    <span class="mesaj"></span>
+                                    <div class="progress" hidden><div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div></div>
+                                    <span class="ipucu">← →: resimler arası geçiş • Enter: odaya ekle / çıkar</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ ÜRÜN LİSTESİ ============ -->
+                    <section class="sayfa" id="s-urunler" hidden>
+                        <div class="row layout-top-spacing">
+                            <div class="col-12">
+                                <div class="widget-content widget-content-area">
+                                    <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+                                        <h5 class="mb-0 me-2">Ürünler <span class="badge badge-light-primary" id="ul-toplam">0</span></h5>
+                                        <div class="ms-auto d-flex flex-wrap gap-2">
+                                            <input type="search" class="form-control form-control-sm liste-ara" id="ul-ara" placeholder="Ürün ara…">
+                                            <select class="form-select form-select-sm w-auto" id="ul-tip">
+                                                <option value="">Bütün tipler</option>
+                                            </select>
+                                            <select class="form-select form-select-sm w-auto" id="ul-sirala">
+                                                <option value="yeni">En yeni</option>
+                                                <option value="ad">Ada göre</option>
+                                                <option value="ucuz">Fiyat (artan)</option>
+                                                <option value="pahali">Fiyat (azalan)</option>
+                                            </select>
+                                            <a href="#urun-ekle" class="btn btn-sm btn-success">＋ Yeni Ürün</a>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle urun-tablosu mb-0">
+                                            <thead>
+                                                <tr><th>Ürün</th><th>Tip</th><th>Fiyat</th><th>Mağazada</th><th>Güncelleme</th><th class="text-end pe-3">İşlem</th></tr>
+                                            </thead>
+                                            <tbody id="ul-liste"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="bos-durum" id="ul-bos" hidden>
+                                        <div class="fs-1">🖼️</div>
+                                        <p class="mb-2">Henüz ürün yok.</p>
+                                        <a href="#urun-ekle" class="btn btn-success">＋ İlk Ürünü Ekle</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ ÜRÜN EKLE / DÜZENLE ============ -->
+                    <section class="sayfa" id="s-urun-form" hidden>
+                        <form id="uf" novalidate>
+                        <div class="row layout-top-spacing g-4">
+                            <div class="col-xxl-8 col-xl-7">
+                                <div class="widget-content widget-content-area ecommerce-create-section">
+                                    <h5 class="mb-3" id="uf-baslik">Yeni Ürün</h5>
+                                    <div class="mb-4">
+                                        <label for="uf-ad" class="form-label">Ürün Adı</label>
+                                        <input type="text" class="form-control" id="uf-ad" maxlength="120" placeholder="Örn. Kahve Fincanı Temperli Cam Tablo" required>
+                                        <div class="invalid-feedback">Ürün adı boş olamaz.</div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="uf-aciklama" class="form-label">Açıklama</label>
+                                        <textarea class="form-control" id="uf-aciklama" rows="4" maxlength="4000" placeholder="Ölçüler, malzeme, kargo bilgisi…"></textarea>
+                                    </div>
+                                    <label class="form-label">Ürün Resmi</label>
+                                    <div class="resim-alani" id="uf-resim-alani" tabindex="0">
+                                        <img id="uf-resim" alt="" hidden>
+                                        <div class="resim-bos" id="uf-resim-bos">
+                                            <div class="fs-2">⬆️</div>
+                                            <div><b>Resmi buraya sürükleyin</b> ya da tıklayıp seçin</div>
+                                            <div class="small text-muted">JPG / PNG; tipi en-boy oranından otomatik bulunur</div>
+                                        </div>
+                                        <div class="mesgul ince" id="uf-resim-mesgul" hidden><span class="spinner-border text-primary"></span></div>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2 mt-2">
+                                        <button type="button" class="btn btn-sm btn-outline-primary" id="uf-resim-sec">📁 Bilgisayardan Seç</button>                                        <span class="small text-muted align-self-center" id="uf-resim-bilgi"></span>
+                                    </div>
+                                    <div class="invalid-feedback d-block" id="uf-resim-hata" hidden>Ürün resmi seçin.</div>
+                                    <input type="file" id="uf-dosya" accept="image/*" hidden>
+                                </div>
+
+                                <div class="widget-content widget-content-area ecommerce-create-section mt-4">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+                                        <h5 class="mb-0">Odalardaki Görünüm <span class="badge badge-light-info" id="uf-oda-sayac"></span></h5>
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" id="uf-oda-hepsi">Tümünü Seç</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" id="uf-oda-hicbiri">Hiçbiri</button>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted small">Tablo, seçtiğiniz tipteki kayıtlı odalarda “Tablo Ekle”deki gibi gösterilir. Mağazada
+                                        görünecek odaları işaretleyin; ⭐ ile vitrindeki kapak görselini seçin. Bir odanın yansımasını beğenmezseniz
+                                        “Odayı düzenle” ile değiştirip kaydedin; ürün görselleri kendiliğinden yenilenir.</p>
+                                    <div class="row g-3" id="uf-odalar"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-4 col-xl-5">
+                                <div class="widget-content widget-content-area ecommerce-create-section">
+                                    <h6 class="mb-1">Tablo Tipi</h6>
+                                    <p class="small text-muted mb-2" id="uf-tip-ipucu">Resim seçince oranından otomatik belirlenir. Yuvarlak tablo için kendiniz seçin.</p>
+                                    <div class="tip-secici" id="uf-tipler"></div>
+                                </div>
+
+                                <div class="widget-content widget-content-area ecommerce-create-section mt-4">
+                                    <div class="mb-3">
+                                        <label for="uf-fiyat" class="form-label">Satış Fiyatı</label>
+                                        <div class="input-group has-validation">
+                                            <span class="input-group-text">₺</span>
+                                            <input type="text" inputmode="decimal" class="form-control" id="uf-fiyat" placeholder="0,00" required>
+                                            <div class="invalid-feedback">Fiyat sıfırdan büyük bir sayı olmalı.</div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="uf-eski-fiyat" class="form-label">İndirimsiz Fiyat <span class="text-muted small">(isteğe bağlı)</span></label>
+                                        <div class="input-group has-validation">
+                                            <span class="input-group-text">₺</span>
+                                            <input type="text" inputmode="decimal" class="form-control" id="uf-eski-fiyat" placeholder="İndirim yoksa boş bırakın">
+                                            <div class="invalid-feedback">Satış fiyatından büyük olmalı.</div>
+                                        </div>
+                                    </div>
+                                    <div class="switch form-switch-custom switch-inline form-switch-success mb-3">
+                                        <input class="switch-input" type="checkbox" role="switch" id="uf-yayinda" checked>
+                                        <label class="switch-label" for="uf-yayinda">Mağazada yayında</label>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-success" id="uf-kaydet">💾 Ürünü Kaydet</button>
+                                        <a href="#urunler" class="btn btn-outline-secondary">Vazgeç</a>
+                                    </div>
+                                    <div class="d-flex gap-2 mt-2" id="uf-mevcut-islemler" hidden>
+                                        <a class="btn btn-sm btn-outline-primary flex-fill" id="uf-magazada" target="_blank">Mağazada Gör ↗</a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger flex-fill" id="uf-sil">🗑 Sil</button>
+                                    </div>
+                                </div>
+
+                                <div class="widget-content widget-content-area ecommerce-create-section mt-4">
+                                    <h6 class="mb-3">Vitrin Kartı Önizlemesi</h6>
+                                    <div class="vitrin-onizleme" id="uf-vitrin"></div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </section>
+
+                    <!-- ============ SİPARİŞLER ============ -->
+                    <section class="sayfa" id="s-siparisler" hidden>
+                        <div class="row layout-top-spacing">
+                            <div class="col-12">
+                                <div class="widget-content widget-content-area">
+                                    <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+                                        <h5 class="mb-0 me-2">Siparişler</h5>
+                                        <div class="d-flex flex-wrap gap-1" id="sp-filtre"></div>
+                                        <input type="search" class="form-control form-control-sm liste-ara ms-auto" id="sp-ara" placeholder="Sipariş no, müşteri…">
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle mb-0 siparis-tablosu">
+                                            <thead><tr><th>Sipariş</th><th>Müşteri</th><th>Ürünler</th><th>Toplam</th><th>Ödeme</th><th>Durum</th><th class="text-end pe-3">İşlem</th></tr></thead>
+                                            <tbody id="sp-liste"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="bos-durum" id="sp-bos" hidden><div class="fs-1">📦</div><p class="mb-0">Bu filtrede sipariş yok.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ CANLI DESTEK ============ -->
+                    <section class="sayfa" id="s-destek" hidden>
+                        <div class="row layout-top-spacing g-3">
+                            <div class="col-xl-4 col-lg-5">
+                                <div class="widget-content widget-content-area destek-liste-kutu">
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <h5 class="mb-0">Sohbetler</h5>
+                                        <span class="ms-auto small text-muted" id="dk-puan"></span>
+                                    </div>
+                                    <div class="btn-group btn-group-sm w-100 mb-2" role="group">
+                                        <button type="button" class="btn btn-outline-primary active" data-dk-sekme="acik" id="dk-acik-sekme">Açık</button>
+                                        <button type="button" class="btn btn-outline-primary" data-dk-sekme="kapali">Kapanan</button>
+                                    </div>
+                                    <input type="search" class="form-control form-control-sm mb-2" id="dk-ara" placeholder="Ad, e-posta, mesaj…">
+                                    <div class="dk-liste" id="dk-liste"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-8 col-lg-7">
+                                <div class="widget-content widget-content-area dk-sohbet-kutu">
+                                    <div class="dk-bos" id="dk-bos"><div class="fs-1">💬</div><p class="mb-0">Soldan bir sohbet seçin.</p>
+                                        <p class="small text-muted">Mağazadaki ziyaretçiler sağ alttaki “Canlı Destek” düğmesiyle yazar; yeni mesajlar burada anında görünür.</p></div>
+                                    <div class="dk-sohbet" id="dk-sohbet" hidden>
+                                        <div class="dk-ust" id="dk-ust"></div>
+                                        <div class="dk-mesajlar" id="dk-mesajlar"></div>
+                                        <div class="dk-yaziyor" id="dk-yaziyor" hidden></div>
+                                        <div class="dk-alt" id="dk-alt"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ DEĞERLENDİRMELER ============ -->
+                    <section class="sayfa" id="s-degerlendirmeler" hidden>
+                        <div class="row layout-top-spacing">
+                            <div class="col-12">
+                                <div class="widget-content widget-content-area">
+                                    <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+                                        <h5 class="mb-0 me-2">Ürün Değerlendirmeleri <span class="badge badge-light-primary" id="dg-toplam">0</span></h5>
+                                        <span class="text-muted small" id="dg-ortalama"></span>
+                                        <div class="btn-group btn-group-sm ms-auto" role="group">
+                                            <button type="button" class="btn btn-outline-primary active" data-dg-filtre="">Tümü</button>
+                                            <button type="button" class="btn btn-outline-primary" data-dg-filtre="cevapsiz">Cevaplanmamış</button>
+                                            <button type="button" class="btn btn-outline-primary" data-dg-filtre="dusuk">1-2 yıldız</button>
+                                            <button type="button" class="btn btn-outline-primary" data-dg-filtre="gizli">Gizlenen</button>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted small">Mağazada ürünü satın alıp teslim alan müşteriler yıldız ve yorum bırakır. Cevabınız ürün sayfasında yorumun altında
+                                        herkese görünür. Uygunsuz bir yorumu gizleyebilirsiniz; gizlenen yorum mağazada görünmez ve puan ortalamasına girmez.</p>
+                                    <div id="dg-panel-liste"></div>
+                                    <div class="bos-durum" id="dg-bos" hidden><div class="fs-1">⭐</div><p class="mb-0">Bu filtrede değerlendirme yok.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ MÜŞTERİLER ============ -->
+                    <section class="sayfa" id="s-musteriler" hidden>
+                        <div class="row layout-top-spacing">
+                            <div class="col-12">
+                                <div class="widget-content widget-content-area">
+                                    <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+                                        <h5 class="mb-0 me-2">Üye Müşteriler <span class="badge badge-light-primary" id="mu-toplam">0</span></h5>
+                                        <input type="search" class="form-control form-control-sm liste-ara ms-auto" id="mu-ara" placeholder="Ad, e-posta, telefon…">
+                                    </div>
+                                    <p class="text-muted small">Mağazadan üye olanlar müşteri olarak kaydolur; panele giremezler. Hesabı kapatılan müşteri giriş yapamaz.</p>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle mb-0">
+                                            <thead><tr><th>Müşteri</th><th>Telefon</th><th>Üyelik</th><th>Sipariş</th><th>Harcama</th><th>Son Sipariş</th><th>Hesap Açık</th></tr></thead>
+                                            <tbody id="mu-liste"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="bos-durum" id="mu-bos" hidden><div class="fs-1">👥</div><p class="mb-0">Henüz üye müşteri yok.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ SATICILAR ============ -->
+                    <section class="sayfa" id="s-saticilar" hidden>
+                        <div class="row layout-top-spacing">
+                            <div class="col-12">
+                                <div class="widget-content widget-content-area">
+                                    <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+                                        <h5 class="mb-0 me-2">Satıcılar</h5>
+                                        <button class="btn btn-sm btn-success ms-auto" id="sa-ekle">＋ Yeni Satıcı Ekle</button>
+                                    </div>
+                                    <p class="text-muted small">Satıcılar panele kullanıcı adıyla girer; her satıcının kendi odaları ve ürünleri vardır,
+                                        siparişleri bütün satıcılar görür. Yeni satıcıyı sadece bir satıcı ekleyebilir.</p>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle mb-0">
+                                            <thead><tr><th>Satıcı</th><th>Kullanıcı Adı</th><th>Eklenme</th><th>Son Giriş</th><th>Hesap Açık</th></tr></thead>
+                                            <tbody id="sa-liste"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+            <div class="footer-wrapper">
+                <div class="footer-section f-section-1">
+                    <p>© <span id="yil"></span> Tablo Stüdyo — Yönetim Paneli</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-kok"></div>
+
+    <script src="/static/panel/sablon/src/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/panel/sablon/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/static/panel/sablon/src/plugins/src/mousetrap/mousetrap.min.js"></script>
+    <script src="/static/panel/sablon/src/plugins/src/waves/waves.min.js"></script>
+    <script src="/static/panel/sablon/layouts/vertical-dark-menu/app.js"></script>
+
+    <script src="/static/panel/ortak.js"></script>
+    <script src="/static/panel/studyo.js"></script>
+    <script src="/static/panel/satis.js"></script>
+    <script src="/static/panel/destek.js"></script>
+    <script src="/static/panel/degerlendirme.js"></script>
+    <script src="/static/panel/urunler.js"></script>
+<script src="/static/canli.js"></script>
+</body>
+</html>

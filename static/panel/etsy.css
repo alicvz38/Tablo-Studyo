@@ -1,0 +1,277 @@
+/* Tablo Stüdyo paneli: ikinci görünüm, Etsy mağaza yönetimi tarzı. <html data-yapi="etsy"> iken geçerlidir; şablonun
+   (Equation) yapısı aynen kalır, sadece görünümü değişir. Açık tema body'de, koyu tema body.dark'ta (şablonun ay / güneş
+   düğmesi). Seçiciler "html[data-yapi=etsy] body" ile başlar: şablonun "body.dark ..." kurallarından daha özgüldür. */
+html[data-yapi="etsy"] body {
+  --e-zemin: #ffffff;
+  --e-zemin-2: #f5f5f1;
+  --e-yan: #fafaf8;
+  --e-kenar: #e1e3df;
+  --e-kenar-koyu: #c9cbc5;
+  --e-yazi: #222222;
+  --e-soluk: #595959;
+  --e-vurgu: #f1641e;
+  --e-vurgu-koyu: #d4511a;
+  --e-vurgu-acik: rgba(241, 100, 30, .1);
+  --e-secili: #ecebe6;
+  --e-tus: #222222;
+  --e-tus-yazi: #ffffff;
+  --e-golge: 0 1px 2px rgba(34, 34, 34, .06), 0 4px 16px rgba(34, 34, 34, .05);
+  --e-yazi-tipi: "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* panel.css değişkenleri */
+  --p-yuzey: var(--e-zemin);
+  --p-yuzey-2: var(--e-zemin-2);
+  --p-kenar: var(--e-kenar);
+  --p-yazi: var(--e-yazi);
+  --p-soluk: var(--e-soluk);
+  --p-vurgu: var(--e-vurgu);
+  --p-sahne: #efeee9;
+  --p-secili: var(--e-vurgu-acik);
+
+  background: var(--e-zemin-2) !important;
+  color: var(--e-yazi);
+  font-family: var(--e-yazi-tipi);
+}
+html[data-yapi="etsy"] body.dark {
+  --e-zemin: #1a1a19;
+  --e-zemin-2: #121211;
+  --e-yan: #161615;
+  --e-kenar: #2f2f2c;
+  --e-kenar-koyu: #45453f;
+  --e-yazi: #f1f0ec;
+  --e-soluk: #a7a59f;
+  --e-vurgu: #f37a40;
+  --e-vurgu-koyu: #ff9361;
+  --e-vurgu-acik: rgba(243, 122, 64, .16);
+  --e-secili: #2b2b28;
+  --e-tus: #f1f0ec;
+  --e-tus-yazi: #141414;
+  --e-golge: 0 1px 2px rgba(0, 0, 0, .4), 0 4px 16px rgba(0, 0, 0, .25);
+  --p-sahne: #0d0d0c;
+}
+html[data-yapi="etsy"] body :not(code):not(pre):not(kbd) { font-family: inherit; }
+html[data-yapi="etsy"] body h1, html[data-yapi="etsy"] body h2, html[data-yapi="etsy"] body h3,
+html[data-yapi="etsy"] body h4, html[data-yapi="etsy"] body h5, html[data-yapi="etsy"] body h6 {
+  color: var(--e-yazi); font-weight: 600; letter-spacing: -.01em;
+}
+html[data-yapi="etsy"] body .text-muted { color: var(--e-soluk) !important; }
+html[data-yapi="etsy"] body a { color: inherit; }
+html[data-yapi="etsy"] #load_screen { background: var(--e-zemin-2); }
+
+/* ---------- üst çubuk ---------- */
+html[data-yapi="etsy"] body .header-container {
+  background: var(--e-zemin) !important; border-bottom: 1px solid var(--e-kenar) !important; box-shadow: none !important;
+}
+html[data-yapi="etsy"] body .header-container .header { background: transparent !important; }
+html[data-yapi="etsy"] body .header-container .sidebarCollapse svg,
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item .nav-link svg,
+html[data-yapi="etsy"] body .navbar .theme-toggle svg { color: var(--e-yazi) !important; }
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.dropdown .dropdown-menu,
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section {
+  background: var(--e-zemin) !important;
+}
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.dropdown .dropdown-menu {
+  border: 1px solid var(--e-kenar) !important; border-radius: 14px; box-shadow: var(--e-golge) !important;
+}
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section {
+  border-bottom: 1px solid var(--e-kenar);
+}
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section h5 { color: var(--e-yazi); }
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .user-profile-section p { color: var(--e-soluk); }
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item a,
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item span,
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item svg { color: var(--e-yazi) !important; }
+html[data-yapi="etsy"] body .navbar .navbar-item .nav-item.user-profile-dropdown .dropdown-menu .dropdown-item:hover a {
+  background: var(--e-zemin-2) !important;
+}
+html[data-yapi="etsy"] body .avatar-title { background: var(--e-vurgu); }
+
+/* ---------- sol menü ---------- */
+html[data-yapi="etsy"] body .sidebar-theme,
+html[data-yapi="etsy"] body .sidebar-wrapper,
+html[data-yapi="etsy"] body #sidebar .theme-brand {
+  background: var(--e-yan) !important; border-color: var(--e-kenar) !important;
+}
+html[data-yapi="etsy"] body .sidebar-wrapper { border-right: 1px solid var(--e-kenar) !important; box-shadow: none !important; }
+html[data-yapi="etsy"] body .shadow-bottom { background: linear-gradient(var(--e-yan) 41%, transparent 95%) !important; }
+html[data-yapi="etsy"] body #sidebar .theme-brand div.theme-text a { color: var(--e-yazi) !important; font-weight: 700; letter-spacing: -.02em; }
+html[data-yapi="etsy"] body .sidebar-wrapper.sidebar-theme .theme-brand .sidebar-toggle .btn-toggle svg { color: var(--e-soluk); }
+html[data-yapi="etsy"] body .sidebar-wrapper ul.menu-categories li.menu.menu-heading > .heading,
+html[data-yapi="etsy"] body .sidebar-wrapper ul.menu-categories li.menu.menu-heading > .heading .feather-minus {
+  color: var(--e-soluk); font-weight: 600; letter-spacing: .06em;
+}
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu > .dropdown-toggle {
+  color: var(--e-yazi); border-radius: 99px; background: transparent; transition: background .15s;
+}
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu > .dropdown-toggle svg:not(.badge-icon) { color: var(--e-yazi); }
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu > .dropdown-toggle:hover,
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu > .dropdown-toggle[aria-expanded=true] {
+  background: var(--e-secili); color: var(--e-yazi);
+}
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu > .dropdown-toggle:hover svg:not(.badge-icon),
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu > .dropdown-toggle[aria-expanded=true] svg,
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu > .dropdown-toggle[aria-expanded=true] span,
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu > .dropdown-toggle[aria-expanded=true]:hover svg {
+  color: var(--e-yazi) !important;
+}
+/* Seçili sayfa: açık gri hap, kalın yazı, solda turuncu çizgi */
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu.active > .dropdown-toggle,
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu.active > .dropdown-toggle[aria-expanded=true] {
+  background: var(--e-secili); box-shadow: inset 3px 0 0 var(--e-vurgu);
+}
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu.active > .dropdown-toggle svg,
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu.active > .dropdown-toggle span,
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu.active > .dropdown-toggle:hover svg:not(.badge-icon) {
+  color: var(--e-yazi) !important; font-weight: 700;
+}
+html[data-yapi="etsy"] body #sidebar ul.menu-categories ul.submenu > li a { color: var(--e-soluk); }
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu ul.submenu > li a:hover { color: var(--e-yazi); }
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu ul.submenu > li a:before { background-color: var(--e-kenar-koyu); }
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu ul.submenu > li.active a { color: var(--e-yazi); font-weight: 700; }
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu ul.submenu > li.active a:before,
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu ul.submenu > li.active a:hover:before { background: var(--e-vurgu) !important; }
+html[data-yapi="etsy"] body #sidebar ul.menu-categories ul.submenu > li.active:before { background-color: transparent; }
+html[data-yapi="etsy"] body #sidebar ul.menu-categories li.menu ul.submenu > li.active a:hover { color: var(--e-yazi) !important; }
+html[data-yapi="etsy"] body .sidebar-label.badge-danger { background: var(--e-vurgu) !important; }
+
+/* ---------- içerik ---------- */
+html[data-yapi="etsy"] body #content, html[data-yapi="etsy"] body .main-container { background: transparent; }
+html[data-yapi="etsy"] body .breadcrumb .breadcrumb-item a,
+html[data-yapi="etsy"] body .breadcrumb-style-one .breadcrumb-item + .breadcrumb-item::before { color: var(--e-soluk); }
+html[data-yapi="etsy"] body .breadcrumb .breadcrumb-item.active { color: var(--e-yazi); font-weight: 700; }
+html[data-yapi="etsy"] body .widget-content-area,
+html[data-yapi="etsy"] body .widget-content,
+html[data-yapi="etsy"] body .card {
+  background: var(--e-zemin) !important; border: 1px solid var(--e-kenar) !important; border-radius: 16px !important;
+  box-shadow: none !important; color: var(--e-yazi);
+}
+html[data-yapi="etsy"] body .widget-content .widget-content-area { border: 0 !important; }
+html[data-yapi="etsy"] body .footer-wrapper .footer-section p { color: var(--e-soluk); }
+
+/* ---------- düğmeler: Etsy gibi tam yuvarlak ---------- */
+html[data-yapi="etsy"] body .btn { border-radius: 99px; font-weight: 600; box-shadow: none !important; }
+html[data-yapi="etsy"] body .btn-primary, html[data-yapi="etsy"] body .btn-success, html[data-yapi="etsy"] body .btn-dark {
+  background-color: var(--e-tus) !important; border-color: var(--e-tus) !important; color: var(--e-tus-yazi) !important;
+}
+html[data-yapi="etsy"] body .btn-primary:hover, html[data-yapi="etsy"] body .btn-success:hover, html[data-yapi="etsy"] body .btn-dark:hover {
+  opacity: .88;
+}
+html[data-yapi="etsy"] body .btn-outline-primary, html[data-yapi="etsy"] body .btn-outline-secondary,
+html[data-yapi="etsy"] body .btn-outline-dark, html[data-yapi="etsy"] body .btn-outline-success, html[data-yapi="etsy"] body .btn-light {
+  background: transparent !important; color: var(--e-yazi) !important; border: 2px solid var(--e-yazi) !important;
+}
+html[data-yapi="etsy"] body .btn-outline-primary:hover, html[data-yapi="etsy"] body .btn-outline-secondary:hover,
+html[data-yapi="etsy"] body .btn-outline-dark:hover, html[data-yapi="etsy"] body .btn-outline-success:hover,
+html[data-yapi="etsy"] body .btn-light:hover {
+  background: var(--e-zemin-2) !important;
+}
+/* Şablonun ":not(:disabled):not(.disabled).active" gibi çok güçlü kurallarını geçmek için :not(#z) (kimlik ağırlığı) */
+html[data-yapi="etsy"] body .btn-check:checked + .btn:not(#z), html[data-yapi="etsy"] body .btn.active:not(#z),
+html[data-yapi="etsy"] body .btn-group > .btn.active:not(#z) {
+  background: var(--e-tus) !important; color: var(--e-tus-yazi) !important; border-color: var(--e-tus) !important;
+}
+/* Turuncu (Etsy vurgusu): ikincil eylemler */
+html[data-yapi="etsy"] body .btn-warning:not(#z), html[data-yapi="etsy"] body .btn-secondary:not(#z) {
+  background: var(--e-vurgu) !important; border-color: var(--e-vurgu) !important; color: #fff !important;
+}
+html[data-yapi="etsy"] body .btn-info:not(#z) {
+  background-color: var(--e-tus) !important; border-color: var(--e-tus) !important; color: var(--e-tus-yazi) !important;
+}
+html[data-yapi="etsy"] body .btn-outline-info:not(#z), html[data-yapi="etsy"] body .btn-outline-warning:not(#z) {
+  background: transparent !important; color: var(--e-yazi) !important; border: 2px solid var(--e-yazi) !important;
+}
+html[data-yapi="etsy"] body .btn-outline-info:not(#z):hover, html[data-yapi="etsy"] body .btn-outline-warning:not(#z):hover {
+  background: var(--e-zemin-2) !important;
+}
+html[data-yapi="etsy"] body .btn-outline-danger { border-width: 2px; }
+/* Tablo satırlarındaki küçük düğmeler: ince çerçeve, dar */
+html[data-yapi="etsy"] body .table .btn:not(#z) { border-width: 1px !important; padding: 3px 10px; font-size: 12.5px; }
+/* Tablo tipi seçici (ürün formu): yuvarlak değil, yumuşak köşeli kutu */
+html[data-yapi="etsy"] body .tip-secenek:not(#z) {
+  border-radius: 14px; border-width: 1px !important; display: flex; flex-direction: column; align-items: center;
+}
+
+/* ---------- rozetler ---------- */
+html[data-yapi="etsy"] body .badge { border-radius: 99px; font-weight: 600; }
+html[data-yapi="etsy"] body .badge-light-primary, html[data-yapi="etsy"] body .badge-light-secondary,
+html[data-yapi="etsy"] body .badge-light-info, html[data-yapi="etsy"] body .badge-light-dark {
+  background: var(--e-secili) !important; color: var(--e-yazi) !important; border-color: transparent !important;
+}
+html[data-yapi="etsy"] body .badge-light-warning {
+  background: var(--e-vurgu-acik) !important; color: var(--e-vurgu-koyu) !important; border-color: transparent !important;
+}
+
+/* ---------- tablolar ---------- */
+html[data-yapi="etsy"] body .table { color: var(--e-yazi); --bs-table-bg: transparent; --bs-table-color: var(--e-yazi); }
+html[data-yapi="etsy"] body .table thead, html[data-yapi="etsy"] body .table thead tr th {
+  background: var(--e-zemin-2) !important; color: var(--e-soluk) !important; font-weight: 600; font-size: 12.5px;
+  text-transform: none; letter-spacing: 0;
+}
+html[data-yapi="etsy"] body .table thead tr th:first-child { border-radius: 10px 0 0 10px; }
+html[data-yapi="etsy"] body .table thead tr th:last-child { border-radius: 0 10px 10px 0; }
+html[data-yapi="etsy"] body .table > tbody > tr > td { border-color: var(--e-kenar) !important; color: var(--e-yazi); }
+html[data-yapi="etsy"] body .table-hover > tbody > tr:hover > * { --bs-table-accent-bg: var(--e-zemin-2); background: var(--e-zemin-2); }
+html[data-yapi="etsy"] body .liste thead th { background: var(--e-zemin) !important; }
+
+/* ---------- formlar ---------- */
+html[data-yapi="etsy"] body .form-control, html[data-yapi="etsy"] body .form-select {
+  background-color: var(--e-zemin) !important; color: var(--e-yazi) !important; border: 1px solid var(--e-kenar-koyu) !important;
+  border-radius: 10px;
+}
+html[data-yapi="etsy"] body .form-control::placeholder { color: var(--e-soluk); }
+html[data-yapi="etsy"] body .form-control:focus, html[data-yapi="etsy"] body .form-select:focus {
+  border-color: var(--e-yazi) !important; box-shadow: 0 0 0 3px var(--e-vurgu-acik) !important;
+}
+html[data-yapi="etsy"] body .form-label, html[data-yapi="etsy"] body label { color: var(--e-yazi); }
+html[data-yapi="etsy"] body .form-text { color: var(--e-soluk); }
+html[data-yapi="etsy"] body .form-check-input { background-color: var(--e-zemin); border-color: var(--e-kenar-koyu); }
+html[data-yapi="etsy"] body .form-check-input:checked:not(#z) { background-color: var(--e-vurgu) !important; border-color: var(--e-vurgu) !important; }
+/* Aç / kapa düğmeleri (şablonun .switch'i): Etsy'deki gibi siyah (koyu temada açık) */
+html[data-yapi="etsy"] body .switch .switch-input:not(#z) { background-color: var(--e-kenar-koyu) !important; border-color: var(--e-kenar-koyu) !important; }
+html[data-yapi="etsy"] body .switch .switch-input:checked:not(#z) { background-color: var(--e-tus) !important; border-color: var(--e-tus) !important; }
+/* Koyu temada açık renk zeminde beyaz top görünmez: açıkken turuncu */
+html[data-yapi="etsy"] body.dark .switch .switch-input:checked:not(#z) { background-color: var(--e-vurgu) !important; border-color: var(--e-vurgu) !important; }
+html[data-yapi="etsy"] body .switch .switch-label { color: var(--e-yazi); }
+html[data-yapi="etsy"] body .form-range::-webkit-slider-thumb { background: var(--e-vurgu); }
+html[data-yapi="etsy"] body .form-range::-moz-range-thumb { background: var(--e-vurgu); }
+html[data-yapi="etsy"] body .input-group-text:not(#z) { background: var(--e-zemin-2) !important; color: var(--e-yazi) !important; border-color: var(--e-kenar-koyu) !important; }
+
+/* ---------- pencereler, açılır menüler, bildirimler ---------- */
+html[data-yapi="etsy"] body .modal-content {
+  background: var(--e-zemin) !important; color: var(--e-yazi); border: 1px solid var(--e-kenar) !important; border-radius: 20px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .25) !important;
+}
+html[data-yapi="etsy"] body .modal-header, html[data-yapi="etsy"] body .modal-footer { border-color: var(--e-kenar) !important; }
+html[data-yapi="etsy"] body .modal-title { color: var(--e-yazi); font-weight: 700; }
+html[data-yapi="etsy"] body.dark .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+html[data-yapi="etsy"] body .dropdown-menu {
+  background: var(--e-zemin); border: 1px solid var(--e-kenar); border-radius: 14px; box-shadow: var(--e-golge);
+}
+html[data-yapi="etsy"] body .dropdown-item { color: var(--e-yazi); border-radius: 8px; }
+html[data-yapi="etsy"] body .dropdown-item:hover { background: var(--e-zemin-2); color: var(--e-yazi); }
+html[data-yapi="etsy"] body .progress { background: var(--e-secili); border-radius: 99px; }
+html[data-yapi="etsy"] body .progress-bar { background: var(--e-vurgu) !important; }
+html[data-yapi="etsy"] body .toast { border-radius: 14px; }
+
+/* ---------- panelin kendi parçaları ---------- */
+html[data-yapi="etsy"] body .sayac-ikon:not(#z) { border-radius: 99px; background: var(--e-secili) !important; }
+html[data-yapi="etsy"] body .sayac-deger { letter-spacing: -.02em; }
+html[data-yapi="etsy"] body .mini-urun, html[data-yapi="etsy"] body .oda-kart { border-radius: 14px; }
+html[data-yapi="etsy"] body .mini-urun:hover { box-shadow: var(--e-golge); }
+html[data-yapi="etsy"] body .oda-kart.secili { border-color: var(--e-yazi); }
+html[data-yapi="etsy"] body .oda-kart.kapak { border-color: var(--e-vurgu); }
+html[data-yapi="etsy"] body .kapak-rozet { background: var(--e-vurgu); }
+html[data-yapi="etsy"] body .tip-yatay, html[data-yapi="etsy"] body .tip-dikey,
+html[data-yapi="etsy"] body .tip-kare, html[data-yapi="etsy"] body .tip-yuvarlak { background: var(--e-secili); color: var(--e-yazi); }
+html[data-yapi="etsy"] body .resim-alani { border-radius: 16px; }
+html[data-yapi="etsy"] body .dk-avatar { background: var(--e-vurgu); }
+html[data-yapi="etsy"] body .dk-balon.biz { background: var(--e-tus); color: var(--e-tus-yazi); }
+html[data-yapi="etsy"] body .dk-oge.secili { background: var(--e-secili); }
+html[data-yapi="etsy"] body .liste tr.secili td { background: var(--e-vurgu-acik) !important; }
+html[data-yapi="etsy"] body .sahne, html[data-yapi="etsy"] body .secili-resim { border-radius: 14px; }
+html[data-yapi="etsy"] body .mesgul { background: rgba(20, 20, 20, .45); }
+
+/* ---------- yapı değiştirme düğmesi (iki görünümde de) ---------- */
+.yapi-dugme { display: inline-flex; align-items: center; gap: 6px; }
+.yapi-dugme .yapi-ad { font-size: 13px; font-weight: 600; }
+html[data-yapi="etsy"] body .yapi-dugme { border: 2px solid var(--e-yazi) !important; color: var(--e-yazi) !important; background: transparent !important; }

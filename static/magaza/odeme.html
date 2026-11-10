@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Siparişi Tamamla — Tablo Stüdyo</title>
+<link rel="icon" type="image/svg+xml" href="/static/panel/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="/static/panel/sablon/src/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/magaza/magaza.css" rel="stylesheet">
+<script src="/static/tema.js"></script>
+</head>
+<body data-sayfa="odeme">
+
+<header class="ust">
+  <div class="kap ust-satir">
+    <a class="logo" href="/">Tablo<span>Stüdyo</span></a>
+    <form class="arama" id="arama-formu" action="/" role="search">
+      <label for="arama" class="visually-hidden">Ara</label>
+      <input id="arama" name="ara" type="search" placeholder="Cam tablo ara: kahve, çiçek, soyut…" autocomplete="off">
+      <button type="submit" aria-label="Ara">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+    </form>
+    <nav class="ust-ikonlar" aria-label="Hesap">
+      <div class="hesap-alani" id="hesap-alani"><a class="ust-link giris-link" href="/giris">Giriş Yap</a></div>
+      <button class="ikon-dugme" type="button" data-bs-toggle="offcanvas" data-bs-target="#favoriler" aria-label="Favoriler">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20.5s-7.5-4.6-9.3-9.3C1.6 8.1 3.6 4.5 7.2 4.5c2 0 3.6 1.1 4.8 2.8 1.2-1.7 2.8-2.8 4.8-2.8 3.6 0 5.6 3.6 4.5 6.7-1.8 4.7-9.3 9.3-9.3 9.3z"/></svg>
+        <span class="rozet" id="favori-sayi"></span>
+      </button>
+      <button class="ikon-dugme" type="button" data-bs-toggle="offcanvas" data-bs-target="#sepet" aria-label="Sepet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="rozet" id="sepet-sayi"></span>
+      </button>
+    </nav>
+  </div>
+  <nav class="kap kategori-cubugu" id="kategoriler" aria-label="Kategoriler">
+    <a href="/" data-tip="">Tüm Cam Tablolar</a>
+    <a href="/?tip=yatay" data-tip="yatay">Yatay Tablolar</a>
+    <a href="/?tip=dikey" data-tip="dikey">Dikey Tablolar</a>
+    <a href="/?tip=kare" data-tip="kare">Kare Tablolar</a>
+    <a href="/?tip=yuvarlak" data-tip="yuvarlak">Yuvarlak Tablolar</a>
+  </nav>
+</header>
+
+<main class="kap">
+  <h1 class="sayfa-baslik">Siparişi Tamamla</h1>
+  <p class="sayfa-alt">Teslimat bilgilerinizi girin ve ödeme şeklini seçin.</p>
+  <div id="odeme-bos" class="bos-sonuc" hidden>
+    <div class="simge">🛍️</div>
+    <h3>Sepetiniz boş</h3>
+    <p>Sipariş vermek için önce sepete ürün ekleyin.</p>
+    <a class="dugme dugme-acik" href="/">Alışverişe başla</a>
+  </div>
+  <form class="odeme-duzen" id="odeme-formu" novalidate>
+    <div>
+      <div class="kutu">
+        <h2>Teslimat Adresi</h2>
+        <div class="iki-sutun">
+          <div class="form-alani"><label for="t-ad">Ad soyad</label><input id="t-ad" maxlength="60" autocomplete="name" required></div>
+          <div class="form-alani"><label for="t-telefon">Telefon</label><input id="t-telefon" type="tel" maxlength="25" autocomplete="tel" placeholder="05xx xxx xx xx" required></div>
+          <div class="form-alani"><label for="t-il">İl</label><input id="t-il" maxlength="40" autocomplete="address-level1" required></div>
+          <div class="form-alani"><label for="t-ilce">İlçe</label><input id="t-ilce" maxlength="40" autocomplete="address-level2" required></div>
+        </div>
+        <div class="form-alani"><label for="t-adres">Açık adres</label><textarea id="t-adres" maxlength="300" autocomplete="street-address" placeholder="Mahalle, cadde / sokak, bina ve daire no" required></textarea></div>
+        <div class="form-alani"><label for="t-not">Sipariş notu <span class="fw-normal text-muted">(isteğe bağlı)</span></label><textarea id="t-not" maxlength="300" placeholder="Satıcıya iletmek istediğiniz bir not"></textarea></div>
+        <label class="d-flex gap-2 align-items-center"><input type="checkbox" id="t-kaydet" checked> Bu adresi sonraki siparişlerim için hatırla</label>
+      </div>
+      <div class="kutu">
+        <h2>Ödeme Şekli</h2>
+        <label class="secenek-kart" id="kart-secenegi" hidden><input type="radio" name="odeme" value="kart">
+          <span><b>Kredi / Banka Kartı <span class="test-rozet" id="kart-test" hidden>Test modu</span></b>
+            <small>Kartınızla hemen ödeyin; bankanızın 3D Secure doğrulamasıyla güvenle.</small></span></label>
+        <div class="kart-formu" id="kart-formu" hidden>
+          <div class="form-alani"><label for="k-ad">Kart üzerindeki ad soyad</label>
+            <input id="k-ad" maxlength="60" autocomplete="cc-name" spellcheck="false"></div>
+          <div class="form-alani"><label for="k-numara">Kart numarası</label>
+            <div class="kart-numara"><input id="k-numara" inputmode="numeric" maxlength="23" autocomplete="cc-number" placeholder="0000 0000 0000 0000">
+              <span class="kart-marka" id="k-marka"></span></div></div>
+          <div class="iki-sutun">
+            <div class="form-alani"><label for="k-tarih">Son kullanma (AA/YY)</label>
+              <input id="k-tarih" inputmode="numeric" maxlength="5" autocomplete="cc-exp" placeholder="AA/YY"></div>
+            <div class="form-alani"><label for="k-cvc">Güvenlik kodu (CVC)</label>
+              <input id="k-cvc" inputmode="numeric" maxlength="4" autocomplete="cc-csc" placeholder="•••"></div>
+          </div>
+          <p class="kart-guven">🔒 Kart bilgileriniz saklanmaz; ödeme iyzico güvencesiyle alınır.</p>
+          <div class="uyari-kutu kart-test-bilgi" id="kart-test-bilgi" hidden>
+            <b>Test modu:</b> gerçek para çekilmez. iyzico test kartı: <code>5528 7900 0000 0008</code>, son kullanma
+            <code>12/30</code>, CVC <code>123</code>. Bankanın doğrulama sayfasında SMS kodu olarak <code>283126</code> yazın.
+          </div>
+        </div>
+        <label class="secenek-kart"><input type="radio" name="odeme" value="kapida" checked>
+          <span><b>Kapıda ödeme</b><small>Ürünü teslim alırken ödersiniz.</small></span></label>
+        <label class="secenek-kart"><input type="radio" name="odeme" value="havale">
+          <span><b>Havale / EFT</b><small>Sipariş onaylandıktan sonra ödeme bilgileri size iletilir.</small></span></label>
+      </div>
+    </div>
+    <aside class="kutu ozet-kutu">
+      <h2>Sipariş Özeti</h2>
+      <div id="ozet-liste"></div>
+      <div class="ozet-toplam"><span>Toplam</span><span id="ozet-toplam"></span></div>
+      <button class="dugme dugme-koyu dugme-tam mt-2" type="submit" id="siparis-ver">Siparişi Onayla</button>
+      <p class="sepet-not">Siparişinizi “Hesabım › Siparişlerim” sayfasından adım adım takip edebilirsiniz.</p>
+    </aside>
+  </form>
+</main>
+<footer class="alt-bilgi">
+  <div class="kap">
+    <div class="alt-izgara">
+      <div>
+        <div class="alt-logo">Tablo Stüdyo</div>
+        <p class="mt-2">Temperli cam tablolar. Her ürün, gerçek oda fotoğraflarında cam yansımasıyla gösterilir.</p>
+      </div>
+      <div>
+        <h4>Alışveriş</h4>
+        <ul>
+          <li><a href="/?tip=yatay">Yatay tablolar</a></li>
+          <li><a href="/?tip=dikey">Dikey tablolar</a></li>
+          <li><a href="/?tip=kare">Kare tablolar</a></li>
+          <li><a href="/?tip=yuvarlak">Yuvarlak tablolar</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hesabım</h4>
+        <ul>
+          <li><a href="/hesabim#siparisler">Siparişlerim</a></li>
+          <li><a href="/hesabim#bilgiler">Hesap bilgilerim</a></li>
+          <li><a href="/kayit">Üye ol</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="alt-satir">© <span class="yil"></span> Tablo Stüdyo</div>
+  </div>
+</footer>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="sepet" aria-labelledby="sepet-baslik">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="sepet-baslik">Sepetiniz</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="sepet-liste" class="flex-grow-1"></div>
+    <div id="sepet-alt"></div>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="favoriler" aria-labelledby="favori-baslik">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="favori-baslik">Favorileriniz</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Kapat"></button>
+  </div>
+  <div class="offcanvas-body" id="favori-liste"></div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3" id="toast-kok"></div>
+
+<script src="/static/panel/sablon/src/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/magaza/magaza.js"></script>
+<script src="/static/magaza/hesap.js"></script>
+<script src="/static/magaza/destek.js"></script>
+<script src="/static/canli.js"></script>
+</body>
+</html>

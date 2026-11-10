@@ -1,0 +1,18 @@
+{
+    // Bu klasör VS Code'da açılınca Tablo Stüdyo sunucusu kendiliğinden başlar (baslat.bat'ı açmaya gerek kalmaz).
+    // Sunucu zaten çalışıyorsa ikinci kez başlatılmaz. Elle başlatmak için: Terminal > Run Task > Tablo Stüdyo Sunucusu
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Tablo Stüdyo Sunucusu",
+            "type": "process",
+            "command": "cmd.exe",
+            "args": ["/c", ".\\baslat.bat"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "isBackground": true,
+            "problemMatcher": [],
+            "runOptions": { "runOn": "folderOpen" },
+            "presentation": { "reveal": "silent", "panel": "dedicated", "showReuseMessage": false, "clear": true }
+        }
+    ]
+}
